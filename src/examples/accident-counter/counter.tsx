@@ -49,19 +49,12 @@ const CounterInputForm = function ({ dispatch }: DispatchCounterAction) {
 export const Counter = () => {
   const [count, dispatch] = useReducer(counterReducer, initialState)
 
-  dispatch({ type: 'setCount', payload: 0 })
-
   return (
     <Card className="border-primary-500 flex w-2/3 flex-col items-center gap-8">
       <h1>Days Since the Last Accident</h1>
-      <p className="text-6xl">{count}</p>
-      <CounterControls setCount={setCount} />
-      <CounterInputForm defaultValue={0} layout='horizontal' onSubmit={e => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget)
-        const newCount = Number(formData.get('counter'))
-        setCount(newCount)
-      }} />
+      <p className="text-6xl">{count.count}</p>
+      <CounterControls dispatch={dispatch} />
+      <CounterInputForm dispatch={dispatch} />
     </Card>
   );
 };
